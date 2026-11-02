@@ -1,0 +1,14 @@
+# local previews and test artifacts
+.pages/
+.edge-profile/
+/preview*.pdf
+/preview*.png
+/mobile*.png
+/tablet*.png
+/desktop*.png
+
+# local browser automation helpers
+.diag.mjs
+.shot.mjs
+.e2e.mjs
+.overflow.mjs

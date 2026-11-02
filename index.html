@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>行笺 · 把旅程写成一本小书</title>
+  <meta name="description" content="行笺是一本可以现场生成的旅行计划书：选目的地、定日期、调节奏，然后打印成册。">
+  <meta name="theme-color" content="#17211c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="行笺首页">
+      <span class="brand-seal" aria-hidden="true">行</span>
+      <span class="brand-name">行笺</span>
+      <span class="brand-en">TRAVEL BOOK</span>
+    </a>
+    <p class="masthead-line">一本可以现场生成的旅行计划书</p>
+    <div class="masthead-actions">
+      <span class="demo-tag">DEMO 0.1</span>
+      <button class="print-button" id="printTop" type="button">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 7V3h10v4M5 13H3V8h14v5h-2M5 11h10v6H5z"/></svg>
+        打印 / PDF
+      </button>
+    </div>
+  </header>
+
+  <main class="app">
+    <aside class="panel">
+      <div class="panel-intro">
+        <p class="kicker">MAKE A LITTLE JOURNEY</p>
+        <h1>把旅程，<br>写成一本<span>小书</span>。</h1>
+        <p class="lede">选一个想去的地方，定下日子。剩下的，交给一张会呼吸的行程纸。</p>
+      </div>
+
+      <form id="planner" class="planner" autocomplete="off">
+        <fieldset class="field">
+          <legend><span>01</span> 去哪里</legend>
+          <div class="dest-grid" id="destGrid"></div>
+        </fieldset>
+
+        <div class="field-row">
+          <fieldset class="field">
+            <legend><span>02</span> 何时出发</legend>
+            <input id="startDate" name="startDate" type="date" required>
+          </fieldset>
+          <fieldset class="field">
+            <legend><span>03</span> 与谁同行</legend>
+            <select id="party" name="party">
+              <option value="couple">两人同行</option>
+              <option value="solo">一个人</option>
+              <option value="friends">三五好友</option>
+              <option value="family">带上家人</option>
+            </select>
+          </fieldset>
+        </div>
+
+        <fieldset class="field">
+          <legend><span>04</span> 旅行节奏</legend>
+          <div class="segmented" id="paceGroup">
+            <label><input type="radio" name="pace" value="slow"><span>慢游</span></label>
+            <label><input type="radio" name="pace" value="balanced" checked><span>均衡</span></label>
+            <label><input type="radio" name="pace" value="packed"><span>紧凑</span></label>
+          </div>
+          <p class="field-hint" id="paceHint">每天 3 站，留一点空白给偶遇。</p>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend><span>05</span> 想遇见</legend>
+          <div class="chips" id="interestChips"></div>
+        </fieldset>
+
+        <button class="generate" id="generate" type="submit">
+          <span class="generate-label">生成我的旅行计划书</span>
+          <span class="generate-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </span>
+        </button>
+        <p class="form-note" id="formNote">4天3夜 · 京都 · 两人同行</p>
+      </form>
+
+      <footer class="panel-foot">
+        <span>为慢慢走的人设计</span>
+        <span class="foot-dot"></span>
+        <span>纯静态 · 无需登录</span>
+      </footer>
+    </aside>
+
+    <section class="stage" id="stage" aria-label="旅行计划书预览">
+      <div class="stage-head">
+        <span class="stage-label">PREVIEW</span>
+        <nav class="page-nav" id="pageNav" aria-label="页面导航"></nav>
+        <span class="page-counter" id="pageCounter">01 / 07</span>
+      </div>
+
+      <div class="stage-watermark" aria-hidden="true">TRAVEL<br>BOOK</div>
+
+      <div class="book-wrap">
+        <div class="book" id="book" data-dest="kyoto" aria-live="polite"></div>
+      </div>
+
+      <div class="stage-foot">
+        <p>这是一本会生长的计划书。所有内容都可以在 <code>app.js</code> 里替换成你的真实行程。</p>
+        <button class="text-button" id="printBottom" type="button">把这本书打印出来 →</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
